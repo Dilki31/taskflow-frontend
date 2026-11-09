@@ -14,20 +14,17 @@ A modern, dark-themed React frontend for a Task Management application. Built wi
 - **Backend Repository:** [TaskFlow API](https://github.com/Dilki31/taskflow-api)
 
 ## 🚀 How to Run Locally
-
-1. Clone the repository:
-```bash```
+```bash
+# 1. Clone the repository
 git clone https://github.com/Dilki31/taskflow-frontend.git
 
-2.Install dependencies:
-```bash```
+# 2. Install dependencies
 npm install
 
-3.Start the development server:
-```bash```
+# 3. Start the development server
 npm run dev
 
-4.Ensure the Spring Boot backend is running on http://localhost:8083.
+# 4. Ensure the Spring Boot backend is running on http://localhost:8083
 
 👨‍💻 Author
 Dilki Nanayakkara - @Dilki31
