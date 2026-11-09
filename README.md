@@ -19,13 +19,12 @@ A modern, dark-themed React frontend for a Task Management application. Built wi
    git clone https://github.com/Dilki31/taskflow-frontend.git
 
 2.Install dependencies:
-
-      bash
+   ```bash
    npm install
 
 3.Start the development server:
 
-      bash
+    ```bash
    npm run dev
 
 4.Ensure the Spring Boot backend is running on http://localhost:8083.
