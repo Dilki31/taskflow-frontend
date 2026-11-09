@@ -20,12 +20,12 @@ A modern, dark-themed React frontend for a Task Management application. Built wi
 
 2.Install dependencies:
 
-  ```bash
+  bash
     npm install
 
 3.Start the development server:
 
-  ```bash
+  bash
     npm run dev
 
 4.Ensure the Spring Boot backend is running on http://localhost:8083.
@@ -33,5 +33,4 @@ A modern, dark-themed React frontend for a Task Management application. Built wi
 👨‍💻 Author
 Dilki Nanayakkara - @Dilki31
 
-👨‍💻 Author
-Dilki Nanayakkara - @Dilki31
+
