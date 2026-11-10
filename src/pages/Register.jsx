@@ -1,39 +1,58 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import api from '../services/api';
+import api, { getErrorMessage } from '../services/api';
+import AuthLayout from '../components/AuthLayout';
 
 export default function Register() {
+    const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [fullName, setFullName] = useState('');
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleRegister = async (e) => {
         e.preventDefault();
+        setError('');
+        setLoading(true);
         try {
-            const res = await api.post('/auth/register', { email, password, fullName });
-            localStorage.setItem('token', res.data.token);
+            const { data } = await api.post('/auth/register', { email, password, fullName });
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('fullName', data.fullName ?? fullName);
             navigate('/dashboard');
         } catch (err) {
-            alert('Registration failed! Email might already exist.');
+            setError(getErrorMessage(err, 'Registration failed. This email may already be in use.'));
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
-        <div className="auth-container">
-            <h2>Create Account</h2>
+        <AuthLayout
+            title="Create your account"
+            subtitle="It takes less than a minute."
+            footer={<>Already have an account? <Link to="/login">Sign in</Link></>}
+        >
             <form onSubmit={handleRegister}>
-                <input type="text" placeholder="Full Name" value={fullName}
-                       onChange={(e) => setFullName(e.target.value)} required />
-                <input type="email" placeholder="Email Address" value={email}
-                       onChange={(e) => setEmail(e.target.value)} required />
-                <input type="password" placeholder="Password" value={password}
+                {error && <div className="alert" role="alert">{error}</div>}
+
+                <label htmlFor="fullName">Full name</label>
+                <input id="fullName" type="text" autoComplete="name" placeholder="Jane Perera"
+                       value={fullName} onChange={(e) => setFullName(e.target.value)} required />
+
+                <label htmlFor="email">Email address</label>
+                <input id="email" type="email" autoComplete="email" placeholder="you@example.com"
+                       value={email} onChange={(e) => setEmail(e.target.value)} required />
+
+                <label htmlFor="password">Password</label>
+                <input id="password" type="password" autoComplete="new-password"
+                       placeholder="Choose a strong password" minLength={6} value={password}
                        onChange={(e) => setPassword(e.target.value)} required />
-                <button type="submit">Sign Up</button>
+
+                <button className="btn btn-primary btn-block" type="submit" disabled={loading}>
+                    {loading ? 'Creating account…' : 'Create account'}
+                </button>
             </form>
-            <p style={{ marginTop: '20px', color: '#94a3b8' }}>
-                Already have an account? <Link to="/login">Login here</Link>
-            </p>
-        </div>
+        </AuthLayout>
     );
 }
