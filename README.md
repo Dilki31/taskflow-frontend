@@ -4,7 +4,8 @@ A modern, dark-themed React frontend for a Task Management application. Built wi
 
 ## ✨ Features
 - Secure JWT Authentication.
-- Create, view, and delete tasks.
+- Create, view, filter, update the status of, and delete tasks.
+- Per-user data: each user only sees their own tasks.
 - Clean, modern UI (Glassmorphism & Dark Mode).
 - Fully responsive.
 
@@ -25,6 +26,14 @@ npm install
 npm run dev
 
 # 4. Ensure the Spring Boot backend is running on http://localhost:8083
+```
+
+To point the app at a different backend, create a `.env.local` file (never commit it):
+
+```
+VITE_API_URL=http://localhost:8083/api
+```
+
 
 👨‍💻 Author
 Dilki Nanayakkara - @Dilki31
